@@ -2,12 +2,12 @@
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
-[![Gemini AI](https://img.shields.io/badge/AI-Gemini_2.0_Flash-4285F4?style=flat&logo=google)](https://deepmind.google/technologies/gemini/)
+[![OpenAI](https://img.shields.io/badge/AI-GPT--4o--mini-412991?style=flat&logo=openai)](https://openai.com/)
 [![Vercel](https://img.shields.io/badge/Deployment-Vercel-000000?style=flat&logo=vercel)](https://vercel.com/)
 
-> **🔴 Live Demo:** [https://github-portfolio-analyzer.vercel.app](https://github-portfolio-analyzer.vercel.app)
+> **🔴 Live Demo:** [https://githubanaly.vercel.app/](https://githubanaly.vercel.app/)
 >
-> **🎥 Video Demo:** [Watch the 30s Walkthrough Here](PASTE_YOUR_YOUTUBE_LINK_HERE)
+> **🎥 Video Demo:** [Watch the 30s Walkthrough Here](https://youtu.be/Zpm1rD2gXIU)
 
 ---
 
@@ -19,7 +19,7 @@ Most student profiles suffer from **"Tutorial Bloat"**—To-Do lists, Weather Ap
 ## 🚀 The Solution: A "Ruthless" AI Recruiter
 **GitHub Portfolio Analyzer** is a **Cynical Senior Engineer AI**. It doesn't just count commits; it judges **Code Quality, Architecture, and Consistency**.
 
-It uses **Gemini 2.0 Flash** to perform a deep audit of your top repositories and assigns a "Hireability Score" based on:
+It uses **OpenAI GPT-4o-mini** (via OpenRouter) to perform a deep audit of your top repositories and assigns a "Hireability Score" based on:
 1.  **Technical Depth:** Distinguishes between a "Hello World" and a Distributed System.
 2.  **Documentation:** Penalizes READMEs that lack architecture diagrams or trade-offs.
 3.  **Consistency:** Flags "Ghost Profiles" (inactive for >3 months).
@@ -39,7 +39,7 @@ It uses **Gemini 2.0 Flash** to perform a deep audit of your top repositories an
 ## 🛠️ Tech Stack
 * **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
 * **Styling:** Tailwind CSS + Shadcn UI + Framer Motion
-* **AI Engine:** Google Gemini 2.0 Flash (via OpenRouter)
+* **AI Engine:** OpenAI GPT-4o-mini (via OpenRouter)
 * **Data:** GitHub REST API (Octokit)
 * **Deployment:** Vercel
 
@@ -50,7 +50,7 @@ It uses **Gemini 2.0 Flash** to perform a deep audit of your top repositories an
 ### Prerequisites
 * Node.js 18+
 * GitHub Token (Classic)
-* Gemini/OpenAI API Key
+* OpenAI API Key
 
 ### Installation
 
@@ -69,7 +69,7 @@ It uses **Gemini 2.0 Flash** to perform a deep audit of your top repositories an
     Create a `.env.local` file in the root:
     ```env
     GITHUB_TOKEN=ghp_your_github_token_here
-    GEMINI_API_KEY=your_ai_api_key_here
+    OPENROUTER_API_KEY=your_openai_api_key_here
     ```
 
 4.  **Run the Development Server**
