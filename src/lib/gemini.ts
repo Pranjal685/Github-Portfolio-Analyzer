@@ -30,6 +30,12 @@ You are a ruthless Scoring Algorithm, not a Recruiter. Do not "judge" based on p
 (Base + Bonuses - Penalties).
 - **HARD CAP:** If User is "Student" and has < 2 Tier 3 Repos, the Final Score CANNOT exceed 65.
 
+**STEP 5: PRECISION RULE (CRITICAL)**
+- Your total_score MUST be a PRECISE integer, NOT a round number.
+- FORBIDDEN scores: 50, 60, 70, 80, 90. These are lazy and unacceptable.
+- REQUIRED: Use specific values like 47, 53, 61, 67, 73, 78, 84, etc.
+- For dimension scores (0-10): Use the FULL range. Scores of 5 and 7 for every dimension are lazy. Vary between 3, 4, 6, 7, 8, 9 based on actual evidence.
+
 **OUTPUT JSON:**
 {
   "total_score": number,
@@ -155,7 +161,7 @@ export async function analyzeProfile(
                     { role: "system", content: SYSTEM_PROMPT },
                     { role: "user", content: userMessage },
                 ],
-                temperature: 0.2,  // Low = deterministic scoring (less variation)
+                temperature: 0.4,  // Balanced: deterministic enough but allows granular scores
                 max_tokens: 800,
                 seed: 42,          // Fixed seed = same input → same output
             });

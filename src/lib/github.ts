@@ -73,18 +73,35 @@ export async function fetchGitHubData(
         updated_at: rawUser.updated_at,
     };
 
-    // --- Step 2: Fetch Top 6 Repositories (sorted by updated_at) ---
+    // --- Step 2: Fetch 30 Repositories (broad pool) ---
     const { data: rawRepos } = await octokit.repos.listForUser({
         username,
         sort: "updated",
         direction: "desc",
-        per_page: 6,
+        per_page: 30,
         type: "owner", // Only repos they own, not forks they haven't modified
     });
 
-    // --- Step 3: Fetch README for each repo (in parallel) ---
+    // --- Step 3: SMART SORT ALGORITHM ---
+    // Rank repos by "Impact" instead of just recency.
+    // Prioritize: Stars > Original Work > Has Description > Has Topics
+    const sortedRepos = rawRepos
+        .map((repo) => ({
+            ...repo,
+            _relevance:
+                (repo.stargazers_count ?? 0) * 5    // High weight for stars
+                + (!repo.fork ? 10 : 0)             // Bonus for original work
+                + (repo.description ? 5 : 0)        // Bonus for description
+                + ((repo.topics?.length ?? 0) > 0 ? 3 : 0) // Bonus for topics
+        }))
+        .sort((a, b) => b._relevance - a._relevance)
+        .slice(0, 6); // Keep only the Top 6 BEST repos
+
+    console.log(`[GitHub] Smart Sort: Selected ${sortedRepos.map(r => `${r.name}(★${r.stargazers_count})`).join(', ')}`);
+
+    // --- Step 4: Fetch README for each repo (in parallel) ---
     const repos: GitHubRepo[] = await Promise.all(
-        rawRepos.map(async (repo) => {
+        sortedRepos.map(async (repo) => {
             const readmeContent = await fetchReadmeContent(username, repo.name);
 
             return {
